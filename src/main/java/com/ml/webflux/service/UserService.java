@@ -1,4 +1,4 @@
-package com.ml.webflux.Service;
+package com.ml.webflux.service;
 
 import com.ml.webflux.model.User;
 import com.ml.webflux.repository.UserRepository;

@@ -1,6 +1,6 @@
 package com.ml.webflux.controller;
 
-import com.ml.webflux.Service.UserService;
+import com.ml.webflux.service.UserService;
 import com.ml.webflux.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

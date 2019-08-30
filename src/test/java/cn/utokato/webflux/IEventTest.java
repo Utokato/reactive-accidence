@@ -1,6 +1,6 @@
-package com.ml.webflux;
+package cn.utokato.webflux;
 
-import com.ml.webflux.model.IEvent;
+import cn.utokato.webflux.model.IEvent;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;

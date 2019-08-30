@@ -1,7 +1,7 @@
-package com.ml.webflux.controller;
+package cn.utokato.webflux.controller;
 
-import com.ml.webflux.service.UserService;
-import com.ml.webflux.model.User;
+import cn.utokato.webflux.service.UserService;
+import cn.utokato.webflux.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

@@ -1,11 +1,12 @@
-package com.ml.webflux.repository;
+package cn.utokato.webflux.repository;
 
-import com.ml.webflux.model.User;
+import cn.utokato.webflux.model.User;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;
 
 // @Repository
-public interface UserRepository extends ReactiveCrudRepository<User,String> {
+public interface UserRepository extends ReactiveCrudRepository<User, String> {
     Mono<User> findByUsername(String username);
+
     Mono<Long> deleteByUsername(String username);
 }

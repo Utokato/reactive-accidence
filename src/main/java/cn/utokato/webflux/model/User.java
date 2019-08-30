@@ -1,4 +1,4 @@
-package com.ml.webflux.model;
+package cn.utokato.webflux.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

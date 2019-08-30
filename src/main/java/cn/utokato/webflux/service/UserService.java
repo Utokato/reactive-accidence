@@ -1,7 +1,7 @@
-package com.ml.webflux.service;
+package cn.utokato.webflux.service;
 
-import com.ml.webflux.model.User;
-import com.ml.webflux.repository.UserRepository;
+import cn.utokato.webflux.repository.UserRepository;
+import cn.utokato.webflux.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

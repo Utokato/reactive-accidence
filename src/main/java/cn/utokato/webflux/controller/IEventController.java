@@ -1,7 +1,7 @@
-package com.ml.webflux.controller;
+package cn.utokato.webflux.controller;
 
-import com.ml.webflux.model.IEvent;
-import com.ml.webflux.repository.IEventRepository;
+import cn.utokato.webflux.model.IEvent;
+import cn.utokato.webflux.repository.IEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

@@ -14,15 +14,15 @@ import java.time.Duration;
 public class IEventTest {
 
     @Test
-    public void testIEvent(){
+    public void testIEvent() {
         // 速度为每秒一个IEvent元素的数据流，不加take的话表示无限个元素的数据流；
         Flux<IEvent> eventFlux = Flux.interval(Duration.ofSeconds(1))
-                .map(l->new IEvent(System.currentTimeMillis(),"messageagainagain"+l))
+                .map(l -> new IEvent(System.currentTimeMillis(), "messageagainagain" + l))
                 .take(5);
         WebClient webClient = WebClient.create("http://localhost:8080");
         webClient.post().uri("/events")
                 .contentType(MediaType.APPLICATION_STREAM_JSON)
-                .body(eventFlux,IEvent.class)
+                .body(eventFlux, IEvent.class)
                 .retrieve()
                 .bodyToMono(Void.class) // body方法设置请求体的数据
                 .block();

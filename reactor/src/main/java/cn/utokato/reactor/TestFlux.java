@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 
 /**
  * @author lma
@@ -320,5 +322,56 @@ public class TestFlux {
         source.subscribe(); // 订阅该 ConnectableFlux 对象，使其开始产生数据
         TimeUnit.SECONDS.sleep(5); // 线程休眠 5s
         source.toStream().forEach(System.out::println); // 订阅者此时只能获得到该序列中的后 5 个元素
+    }
+
+    @Test
+    public void testParallelFlux1() throws InterruptedException {
+        Flux.range(1, 10)
+                .publishOn(Schedulers.parallel())
+                .log().subscribe();
+        TimeUnit.MILLISECONDS.sleep(10);
+    }
+
+    @Test
+    public void testParallelFlux2() throws InterruptedException {
+        Flux.range(1, 10)
+                .parallel(2)
+                .runOn(Schedulers.parallel())
+                .log().subscribe();
+        TimeUnit.MILLISECONDS.sleep(10);
+    }
+
+    @Test
+    public void testTransform() {
+        Function<Flux<String>, Flux<String>> filterAndMap =
+                f -> f.filter(color -> !"orange".equals(color))
+                        .map(String::toUpperCase);
+
+        Flux.fromIterable(Arrays.asList("blue", "green", "orange", "purple"))
+                .doOnNext(System.out::println)
+                .transform(filterAndMap)
+                .subscribe(d -> System.out.println("Subscriber to Transformed MapAndFilter: " + d));
+    }
+
+    @Test
+    public void testCompose() {
+        AtomicInteger atomicInteger = new AtomicInteger();
+        Function<Flux<String>, Flux<String>> filterAndMap = f -> {
+            if (atomicInteger.incrementAndGet() == 1) {
+                return f.filter(color -> !color.equals("orange"))
+                        .map(String::toUpperCase);
+            }
+            return f.filter(color -> !color.equals("purple"))
+                    .map(String::toUpperCase);
+        };
+        Flux<String> composedFlux =
+                Flux.fromIterable(Arrays.asList("blue", "green", "orange", "purple"))
+                        .doOnNext(System.out::println)
+                        // 注意 compose 与 transform 的区别
+                        .compose(filterAndMap);
+
+        composedFlux.subscribe(d -> System.out.println("Subscriber 1 to Composed MapAndFilter :" + d));
+        System.out.println("====");
+        composedFlux.subscribe(d -> System.out.println("Subscriber 2 to Composed MapAndFilter: " + d));
     }
 }

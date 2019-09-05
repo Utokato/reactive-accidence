@@ -10,7 +10,9 @@
     <modules>
         <module>webflux01</module>
         <module>webflux02</module>
+        <module>webflux03</module>
         <module>reactor</module>
+
     </modules>
     <packaging>pom</packaging>
 

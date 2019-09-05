@@ -12,6 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
+import java.time.Duration;
 
 /**
  * @author lma
@@ -45,7 +46,7 @@ public class UserController {
      */
     @GetMapping(value = "/stream/all", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<User> streamGetAll() {
-        return userRepository.findAll();
+        return userRepository.findAll().delayElements(Duration.ofSeconds(1));
     }
 
     /**

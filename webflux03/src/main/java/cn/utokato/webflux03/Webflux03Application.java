@@ -22,7 +22,7 @@ import org.springframework.web.reactive.function.client.WebClient;
  * 通过该客户端发送post请求来创建数据
  * <p>
  * 之后再浏览器中通过get请求进行访问，就能看到不断创建地数据流向了mongodb中
- * 又由服务端推送到了浏览器中，实现了一个流式管道地搭建
+ * 又由服务端推送到了浏览器中，实现了一个流式管道的搭建
  *
  * @author lma
  * @date 2019/09/05

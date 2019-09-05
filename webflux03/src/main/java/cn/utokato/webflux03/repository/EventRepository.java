@@ -12,9 +12,6 @@ import reactor.core.publisher.Flux;
  */
 @Repository
 public interface EventRepository extends ReactiveMongoRepository<MyEvent, Long> {
-
     @Tailable
     Flux<MyEvent> findBy();
-
-
 }

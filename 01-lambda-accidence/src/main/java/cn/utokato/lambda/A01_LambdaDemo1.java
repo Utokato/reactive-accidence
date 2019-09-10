@@ -28,7 +28,6 @@ interface Interface3 extends Interface1, Interface2 {
     // 当继承的多个接口中有相同的默认实现方法时，需要指明覆盖哪一个默认实现的方法
     @Override
     default int add(int x, int y) {
-        // TODO Auto-generated method stub
         return Interface1.super.add(x, y);
     }
 

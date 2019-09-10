@@ -21,10 +21,13 @@ public class Webflux03ApplicationTests {
 
     /**
      * 注意 {@link WebClient} 的使用
+     *
+     * 这是一个客户端，通过 post 方法向 mongodb 推送数据
+     *
      */
     @Test
     public void webClientToPostEvent() {
-        Flux<MyEvent> eventFlux = Flux.interval(Duration.ofSeconds(1)).map(
+        Flux<MyEvent> eventFlux = Flux.interval(Duration.ofMillis(100)).map(
                 l -> new MyEvent(System.currentTimeMillis(), "message-" + l)
         );
         WebClient webClient = WebClient.create("http://localhost:7070");

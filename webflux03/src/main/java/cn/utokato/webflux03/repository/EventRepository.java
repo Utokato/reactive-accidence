@@ -12,6 +12,12 @@ import reactor.core.publisher.Flux;
  */
 @Repository
 public interface EventRepository extends ReactiveMongoRepository<MyEvent, Long> {
+
+    /**
+     * 获取 mongodb 中最新的数据
+     *
+     * @return
+     */
     @Tailable
     Flux<MyEvent> findBy();
 }

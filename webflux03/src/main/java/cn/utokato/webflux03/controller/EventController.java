@@ -28,12 +28,15 @@ public class EventController {
         return eventRepository.insert(events).then();
     }
 
+    /**
+     * 通过浏览器获取 mongodb 中最新的一条数据。
+     * 以 application/stream+json 的方式进行返回
+     * SSE Serve-sent Event
+     *
+     * @return
+     */
     @GetMapping(path = "", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     public Flux<MyEvent> getEvents() {
         return eventRepository.findBy();
     }
-
-
-
-
 }

@@ -7,8 +7,11 @@ import reactor.core.publisher.Mono;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Reactor中的发布者（Publisher）由Flux和Mono两个类定义，它们都提供了丰富的操作符（operator）。
@@ -89,7 +92,55 @@ public class TestReactorCreate {
             }
             return list;
         }).subscribe(System.out::println);
+
+        System.out.println("=============");
+
+        /**
+         * 原生类型及其包装类，以及String等属于不可变类型
+         *
+         * 使用不可变类型作为状态变量
+         */
+        Flux.generate(
+                () -> 0,
+                (state, sink) -> {
+                    sink.next("3 x " + state + " = " + 3 * state);
+                    if (state == 10) {
+                        sink.complete();
+                    }
+                    return state + 1;
+                }).subscribe(System.out::println);
+
+        /**
+         * 使用可变类型作为状态变量
+         */
+        Flux.generate(
+                AtomicLong::new,
+                (state, sink) -> {
+                    long i = state.getAndIncrement();
+                    sink.next("3 x " + i + " = " + 3 * i);
+                    if (i == 10) {
+                        sink.complete();
+                    }
+                    return state;
+                }).subscribe(System.out::println);
+
+        /**
+         * 在 generate 方法中增加 Consumer
+         */
+        Flux.generate(
+                AtomicInteger::new,
+                (state, sink) -> {
+                    int i = state.getAndIncrement();
+                    sink.next("3 x " + i + " = " + 3 * i);
+                    if (i == 10) {
+                        sink.complete();
+                    }
+                    return state;
+                }, (state) -> System.out.println("state: " + state))
+                .subscribe(System.out::println);
+
     }
+
 
     /**
      * 9. create()
@@ -98,11 +149,26 @@ public class TestReactorCreate {
      */
     @Test
     public void testCreateFlux3() {
-        Flux.create(sink -> {
+        Flux.create(fluxSink -> {
             for (int i = 0; i < 10; i++) {
-                sink.next(i);
+                fluxSink.next(i);
             }
-            sink.complete();
+            fluxSink.complete();
         }).subscribe(System.out::println);
     }
+
+    /**
+     * create 的一个变体是 push，适合生成事件流
+     */
+    @Test
+    public void testCreateFlux4() {
+        Flux.push(fluxSink -> {
+            for (int i = 0; i < 10; i++) {
+                fluxSink.next(i);
+            }
+            fluxSink.complete();
+        }).subscribe(System.out::println);
+    }
+
 }
+

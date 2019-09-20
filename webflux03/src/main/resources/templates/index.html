@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试界面</title>
+</head>
+<body>
+<h3>测试界面</h3>
+<input type="number" id="cid">
+<input type="button" value="发起WebSocket请求" onclick="sendWebSocketRequest()">
+</body>
+<script>
+
+    function sendWebSocketRequest() {
+        let cid = document.getElementById("cid").value;
+        console.log(cid);
+
+        const basePath = "ws://localhost:7070/socket/";
+
+        let socket;
+        if (typeof (WebSocket) == "undefined") {
+            console.log("您的浏览器不支持WebSocket");
+        } else {
+            console.log("您的浏览器支持WebSocket");
+
+            socket = new WebSocket(basePath + cid);
+
+            socket.onopen = function () {
+                console.log("Socket 已打开");
+                //socket.send("这是来自客户端的消息" + location.href + new Date());
+            };
+
+            socket.onmessage = function (msg) {
+                console.log(msg.data);
+                //发现消息进入    开始处理前端触发逻辑
+            };
+
+            socket.onclose = function () {
+                console.log("Socket已关闭");
+            };
+
+            socket.onerror = function () {
+                alert("Socket发生了错误");
+                //此时可以尝试刷新页面
+            }
+        }
+    }
+
+</script>
+</html>

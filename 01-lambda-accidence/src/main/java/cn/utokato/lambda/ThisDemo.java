@@ -3,6 +3,9 @@ package cn.utokato.lambda;
 /**
  * Lambda 中的 this 关键字
  *
+ * 关于 Lambda 中的 this 关键字 可以参考一下文章：
+ * https://github.com/Utokato/Cargo/blob/master/notes/java/pass-value-or-reference-in-java/PassValueOrReferenceInJava.md
+ *
  * @author lma
  * @date 2019/09/12
  * @modifyDate 2019/09/19

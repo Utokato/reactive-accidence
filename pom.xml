@@ -15,6 +15,7 @@
         <module>01-lambda-accidence</module>
         <module>02-stream-accidence</module>
         <module>03-jdk9-accidence</module>
+        <module>web-client</module>
 
     </modules>
     <packaging>pom</packaging>

@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 通常情况下，我们需要对源发布者发出的原始数据流进行多个阶段的处理，并最终得到我们需要的数据。
@@ -48,6 +49,7 @@ public class TestReactorOperator {
     public void testFlatMap() {
         // 将每个 String 分割为 char 流，然后将所有的 char 流进行合并
         Flux.just("hello", "reactor").flatMap(str -> Flux.just(str.split(""))).subscribe(System.out::println);
+        // Flux.fromStream(Stream.of("hello","reactor").flatMap(str-> Arrays.stream(str.split("")))).subscribe(System.out::println);
     }
 
     /**

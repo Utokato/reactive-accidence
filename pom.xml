@@ -5,20 +5,33 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.utokato</groupId>
-    <artifactId>reactive</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>reactive-accidence</artifactId>
+    <version>1.0.0</version>
     <modules>
-        <module>webflux01</module>
-        <module>webflux02</module>
-        <module>webflux03</module>
-        <module>reactor</module>
+        <module>00-jdk8-accidence</module>
         <module>01-lambda-accidence</module>
         <module>02-stream-accidence</module>
         <module>03-jdk9-accidence</module>
+        <module>reactor</module>
+        <module>webflux01</module>
+        <module>webflux02</module>
+        <module>webflux03</module>
         <module>web-client</module>
-
     </modules>
     <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13</version>
+        </dependency>
+    </dependencies>
 
 
     <build>

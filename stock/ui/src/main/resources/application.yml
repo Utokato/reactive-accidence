@@ -1,0 +1,8 @@
+spring:
+  main:
+    web-application-type: none
+  application:
+    ui:
+      title: Stock Prices
+  profiles:
+    active: rsocket

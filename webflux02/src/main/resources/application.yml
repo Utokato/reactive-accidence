@@ -1,6 +1,6 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://120.78.181.228:27017/newflux
+      uri: mongodb://119.23.182.198:27017/newflux
 server:
   port: 7070

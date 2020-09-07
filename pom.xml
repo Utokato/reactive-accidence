@@ -17,6 +17,8 @@
         <module>webflux02</module>
         <module>webflux03</module>
         <module>web-client</module>
+        <module>rsocket-01</module>
+        <module>stock</module>
     </modules>
     <packaging>pom</packaging>
 
